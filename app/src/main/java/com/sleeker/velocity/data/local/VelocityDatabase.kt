@@ -8,7 +8,7 @@ import com.sleeker.velocity.data.model.RunEntity
 
 @Database(
     entities = [RunEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(LocalDateTimeConverter::class)

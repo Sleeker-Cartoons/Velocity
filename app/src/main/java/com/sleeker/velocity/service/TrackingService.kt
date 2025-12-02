@@ -44,9 +44,9 @@ class TrackingService : Service() {
     private fun startLocationUpdates() {
         val locationRequest = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,
-            5000L // Update every 5 seconds
+            1000L // Update every 5 seconds
         )
-            .setMinUpdateDistanceMeters(2f) // Only update if 2+ meters away
+            .setMinUpdateDistanceMeters(10f) // Only update if 5+ meters away
             .build()
 
         locationCallback = object : LocationCallback() {
@@ -69,12 +69,24 @@ class TrackingService : Service() {
         }
     }
 
+//    private fun sendLocationBroadcast(location: Location) {
+//        val intent = Intent(ACTION_LOCATION_UPDATE)
+//        intent.putExtra("latitude", location.latitude)
+//        intent.putExtra("longitude", location.longitude)
+//        intent.putExtra("accuracy", location.accuracy)
+//        intent.putExtra("speed", location.speed)
+//
+//        sendBroadcast(intent)
+//    }
+
     private fun sendLocationBroadcast(location: Location) {
-        val intent = Intent(ACTION_LOCATION_UPDATE)
-        intent.putExtra("latitude", location.latitude)
-        intent.putExtra("longitude", location.longitude)
-        intent.putExtra("accuracy", location.accuracy)
-        intent.putExtra("speed", location.speed)
+        val intent = Intent(ACTION_LOCATION_UPDATE).apply {
+            putExtra("latitude", location.latitude)
+            putExtra("longitude", location.longitude)
+            putExtra("accuracy", location.accuracy)
+            putExtra("speed", location.speed)
+            setPackage(packageName) // <--- ADD THIS LINE (Fixes the issue)
+        }
         sendBroadcast(intent)
     }
 

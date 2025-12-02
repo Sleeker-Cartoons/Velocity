@@ -130,35 +130,87 @@ fun RunDetailScreen(
                         }
                     }
 
+//                    item {
+//                        // Stats Row (4 cards)
+//                        Row(
+//                            modifier = Modifier.fillMaxWidth(),
+//                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+//                        ) {
+//                            StatCard(
+//                                label = "Distance",
+//                                value = viewModel.formatDistance(run!!.distanceKm),
+//                                modifier = Modifier.weight(1f)
+//                            )
+//                            StatCard(
+//                                label = "Time",
+//                                value = viewModel.formatDuration(run!!.durationSeconds),
+//                                modifier = Modifier.weight(1f)
+//                            )
+//                            StatCard(
+//                                label = "Avg Pace",
+//                                value = viewModel.formatPace(run!!.avgPacePerKm),
+//                                modifier = Modifier.weight(1f)
+//                            )
+//                            StatCard(
+//                                label = "Calories",
+//                                value = viewModel.formatCalories(run!!.caloriesBurned),
+//                                modifier = Modifier.weight(1f)
+//                            )
+//                        }
+//                    }
+
+                    // velocity/ui/detail/RunDetailScreen.kt
+
+// ... inside the LazyColumn item with the StatCards
                     item {
-                        // Stats Row (4 cards)
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            StatCard(
-                                label = "Distance",
-                                value = viewModel.formatDistance(run!!.distanceKm),
-                                modifier = Modifier.weight(1f)
-                            )
-                            StatCard(
-                                label = "Time",
-                                value = viewModel.formatDuration(run!!.durationSeconds),
-                                modifier = Modifier.weight(1f)
-                            )
-                            StatCard(
-                                label = "Avg Pace",
-                                value = viewModel.formatPace(run!!.avgPacePerKm),
-                                modifier = Modifier.weight(1f)
-                            )
-                            StatCard(
-                                label = "Calories",
-                                value = viewModel.formatCalories(run!!.caloriesBurned),
-                                modifier = Modifier.weight(1f)
-                            )
+                        // Update the Row to include Max Speed.
+                        // Since 5 cards won't fit well in one row, let's make a second row or adjust the layout.
+                        // Here is a layout with 2 rows of metrics:
+
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            // Row 1
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                StatCard(
+                                    label = "Distance",
+                                    value = viewModel.formatDistance(run!!.distanceKm),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                StatCard(
+                                    label = "Time",
+                                    value = viewModel.formatDuration(run!!.durationSeconds),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                StatCard(
+                                    label = "Calories",
+                                    value = viewModel.formatCalories(run!!.caloriesBurned),
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
+
+                            // Row 2
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                StatCard(
+                                    label = "Avg Pace",
+                                    value = viewModel.formatPace(run!!.avgPacePerKm),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                // <--- NEW MAX SPEED CARD
+                                StatCard(
+                                    label = "Max Speed",
+                                    value = viewModel.formatSpeed(run!!.maxSpeedKmph),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                // Spacer to balance the row visually
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
                         }
                     }
-
                     item {
                         // Pace Chart Placeholder
                         Surface(

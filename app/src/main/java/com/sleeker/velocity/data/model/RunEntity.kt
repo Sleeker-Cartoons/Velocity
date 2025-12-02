@@ -16,6 +16,7 @@ data class RunEntity(
     val caloriesBurned: Int,
     val maxPacePerKm: Double,
     val minPacePerKm: Double,
+    val maxSpeedKmph: Double = 0.0,
     val polylinePoints: String, // Encoded polyline or JSON list of LatLng
     val isCompleted: Boolean = false,
     val gpxData: String? = null, // GPX export data

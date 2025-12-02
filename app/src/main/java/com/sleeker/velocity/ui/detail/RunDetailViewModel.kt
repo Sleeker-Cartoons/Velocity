@@ -53,6 +53,9 @@ class RunDetailViewModel @Inject constructor(
         return run.startTime.format(formatter)
     }
 
+    fun formatSpeed(speedKmph: Double): String {
+        return String.format("%.1f km/h", speedKmph)
+    }
     fun getSplits(run: RunEntity) = trackingUseCase.generateSplits(
         distance = run.distanceKm,
         duration = run.durationSeconds,
