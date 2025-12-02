@@ -1,3 +1,6 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -12,6 +15,16 @@ plugins {
 //    id("com.google.dagger.hilt.android")
         }
 
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { load(it) }
+    }
+}
+val MAPS_API_KEY: String = localProperties.getProperty("MAPS_API_KEY") ?: ""
+
+
 android {
     namespace = "com.sleeker.velocity"
     compileSdk = 36
@@ -24,6 +37,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        manifestPlaceholders["MAPS_API_KEY"] = MAPS_API_KEY
     }
 
     buildTypes {

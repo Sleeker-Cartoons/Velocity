@@ -34,7 +34,7 @@
         <!-- Google Maps API Key (Replace with your own key from Google Cloud Console) -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCmyeZ8m68A4-id7_6Z26wAmDwjNvHtrLQ" />
+            android:value= "${MAPS_API_KEY}" />
 
         <!-- Main Activity -->
         <activity
